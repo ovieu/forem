@@ -19,7 +19,7 @@ APPLE_OMNIAUTH_SETUP = lambda do |env|
   env["omniauth.strategy"].options[:client_id] = SiteConfig.apple_client_id
   env["omniauth.strategy"].options[:scope] = "email name"
   env["omniauth.strategy"].options[:key_id] = SiteConfig.apple_key_id
-  env["omniauth.strategy"].options[:pem] = SiteConfig.apple_pem
+  env["omniauth.strategy"].options[:pem] = SiteConfig.apple_pem.to_s.gsub("\\n", "\n")
   env["omniauth.strategy"].options[:provider_ignores_state] = true
   env["omniauth.strategy"].options[:team_id] = SiteConfig.apple_team_id
 end
@@ -96,7 +96,7 @@ Devise.setup do |config|
   # It will change confirmation, password recovery and other workflows
   # to behave the same regardless if the e-mail provided was right or wrong.
   # Does not affect registerable.
-  # config.paranoid = true
+  config.paranoid = true
 
   # By default Devise will store the user in session. You can skip storage for
   # particular strategies by setting this option.
